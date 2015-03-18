@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Configuration
+scriptPath="$(readlink -f $0)"
+scriptName="$(basename $scriptPath)"
+
+# Function for logging messages
+function log() {
+
+	# parameters
+        local level="$1"
+        local text="$2"
+
+        # create log message
+	local now=$(date +"%d-%m-%Y %H:%M:%S")
+        echo -e "\n$now [$level] $text\n"
+}
+
+# check if JAVA_HOME is set
+if [ "$JAVA_HOME" != "" ]
+then
+	# start java application
+	"$JAVA_HOME/bin/java" -jar "$scriptPath.jar" "$@"
+else
+	log "ERROR" "Please set 'JAVA_HOME' to execute the program!"
+fi
