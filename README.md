@@ -1,7 +1,7 @@
 Health Checker
 =======
 
-Health checker for the following applications: HTTP servers, JDBC databases, LDAP servers, MongoDB servers, Solr servers. 
+Health checker for the following applications: HTTP servers, JDBC databases, LDAP servers, MongoDB servers, Solr servers, ElasticSearch servers. 
 
 Installation
 -------------
