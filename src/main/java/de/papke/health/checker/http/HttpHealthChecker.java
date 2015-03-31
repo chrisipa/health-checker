@@ -41,6 +41,7 @@ public class HttpHealthChecker extends HealthChecker {
 	private static final String PROTOCOL_SEPARATOR = "://";
 	private static final String DATA_SEPARATOR = ":";
 	private static final String PATH_SEPARATOR = "/";
+	private static final String SESSION_ID_SEPARATOR = ";";
 	
 	private static Options options = new Options();
 
@@ -193,16 +194,25 @@ public class HttpHealthChecker extends HealthChecker {
 				
 				Header locationHeader = locationArray[0];
 				String locationUrl = locationHeader.getValue();
-				
-				// if the location url is relative we have to build the absolute url for the GET request
-				if (!locationUrl.startsWith(HTTP_SCHEME_PREFIX)) {
-					String pathPrefix = locationUrl.startsWith(PATH_SEPARATOR) ? "" : PATH_SEPARATOR;
-					URI uri = new URI(url);
-					locationUrl = uri.getScheme() + PROTOCOL_SEPARATOR + uri.getHost() + pathPrefix + locationUrl;
+
+				// if the location url is given
+				if (StringUtils.isNotEmpty(locationUrl)) {
+					
+					// if the location url is relative we have to build the absolute url for the GET request
+					if (!locationUrl.startsWith(HTTP_SCHEME_PREFIX)) {
+						String pathPrefix = locationUrl.startsWith(PATH_SEPARATOR) ? "" : PATH_SEPARATOR;
+						URI uri = new URI(url);
+						locationUrl = uri.getScheme() + PROTOCOL_SEPARATOR + uri.getHost() + pathPrefix + locationUrl;
+					}
+					
+					// if the location url contains a session id we have to remove it
+					if (locationUrl.contains(SESSION_ID_SEPARATOR)) {
+						locationUrl = locationUrl.substring(0, locationUrl.indexOf(SESSION_ID_SEPARATOR));
+					}
+					
+					request = new HttpGet(locationUrl);
+					response = httpClient.execute(request);
 				}
-				
-				request = new HttpGet(locationUrl);
-				response = httpClient.execute(request);
 			}
 		}		
 		

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.papke</groupId>
 	<artifactId>health-checker</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<name>Health Checker</name>
 
 	<build>
