@@ -1,6 +1,8 @@
 Health Checker
 =======
 
+[![Build Status](https://papke.it/jenkins/buildStatus/icon?job=health-checker)](https://papke.it/jenkins/job/health-checker/)
+
 Health checker for the following applications: HTTP servers, JDBC databases, LDAP servers, MongoDB servers, Solr servers, ElasticSearch servers. 
 
 Prerequisites
