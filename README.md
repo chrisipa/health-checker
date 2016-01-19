@@ -11,10 +11,20 @@ Prerequisites
 
 Installation
 -------------
-* Download and extract the zip archive:
+* Create install directory:
 ```
-sudo wget https://raw.githubusercontent.com/chrisipa/health-checker/master/public/health-checker.zip
-sudo unzip health-checker.zip -d /opt
+sudo mkdir /opt/health-checker
+```
+
+* Download necessary files:
+```
+sudo wget https://raw.githubusercontent.com/chrisipa/health-checker/master/bin/health-checker -O /opt/health-checker/health-checker
+sudo wget https://papke.it/jenkins/job/health-checker/lastStableBuild/de.papke%24health-checker/artifact/de.papke/health-checker/1.0.3/health-checker-1.0.3.jar -O /opt/health-checker/health-checker.jar
+```
+
+* Make starter script executable:
+```
+sudo chmod +x /opt/health-checker/health-checker
 ```
 
 Usage
