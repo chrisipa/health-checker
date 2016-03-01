@@ -2,7 +2,7 @@ Health Checker
 =======
 
 [![Build Status](https://papke.it/jenkins/buildStatus/icon?job=health-checker)](https://papke.it/jenkins/job/health-checker/)
-[![Code Analysis](https://img.shields.io/badge/code%20analysis-available-blue.svg)](http://docker:9000/sonar/overview?id=38)
+[![Code Analysis](https://img.shields.io/badge/code%20analysis-available-blue.svg)](https://papke.it/sonar/overview?id=38)
 
 Health checker for the following applications: HTTP servers, JDBC databases, LDAP servers, MongoDB servers, Solr servers, ElasticSearch servers. 
 
