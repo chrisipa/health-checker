@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.papke</groupId>
 	<artifactId>health-checker</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<name>Health Checker</name>
 
 	<build>
@@ -113,19 +113,19 @@
 			<version>0.19.2</version>
 		</dependency>
 		<dependency>
-			<artifactId>solr-solrj</artifactId>
 			<groupId>org.apache.solr</groupId>
-			<version>1.4.1</version>
+			<artifactId>solr-solrj</artifactId>
+			<version>4.10.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.5.5</version>
+			<version>1.6.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.1.2</version>
+			<version>4.2.6</version>
 		</dependency>
 	</dependencies>
 </project>
