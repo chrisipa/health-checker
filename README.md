@@ -1,17 +1,18 @@
-Health Checker
-=======
+# Health Checker
 
 [![Build Status](https://papke.it/jenkins/buildStatus/icon?job=health-checker)](https://papke.it/jenkins/job/health-checker/)
 [![Code Analysis](https://img.shields.io/badge/code%20analysis-available-blue.svg)](https://papke.it/sonar/overview?id=38)
 
 Health checker for the following applications: HTTP servers, JDBC databases, LDAP servers, MongoDB servers, Solr servers, ElasticSearch servers. 
 
-Prerequisites
--------------
+## Plain version
+
+### Prerequisites
+
 * [Java 6](http://www.oracle.com/technetwork/java/javase/downloads/index.html) must be installed
 
-Installation
--------------
+### Installation
+
 * Create install directory:
 ```
 sudo mkdir /opt/health-checker
@@ -28,8 +29,8 @@ sudo wget https://papke.it/jenkins/job/health-checker/lastStableBuild/de.papke%2
 sudo chmod +x /opt/health-checker/health-checker
 ```
 
-Usage
--------------
+### Usage
+
 * Specify a supported type as environment variable (possible values: elasticsearch, http, jdbc, ldap, mongo, solr):
 ```
 export HEALTH_CHECKER_TYPE="http"
@@ -55,3 +56,12 @@ usage: health-checker
                                response text [default: .*]
 ```
 * Specify necessary parameters (dependend on HEALTH_CHECKER_TYPE)
+
+## Docker version
+
+### Usage
+
+* Run as Docker container: 
+```
+docker run --rm -e HEALTH_CHECKER_TYPE=http chrisipa/health-checker
+```
