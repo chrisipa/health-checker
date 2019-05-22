@@ -8,6 +8,7 @@ import de.papke.health.checker.http.HttpHealthChecker;
 import de.papke.health.checker.jdbc.JdbcHealthChecker;
 import de.papke.health.checker.ldap.LdapHealthChecker;
 import de.papke.health.checker.mongo.MongoHealthChecker;
+import de.papke.health.checker.smtp.SmtpHealthChecker;
 import de.papke.health.checker.solr.SolrHealthChecker;
 
 /**
@@ -53,6 +54,9 @@ public class HealthCheckerFactory {
 				break;
 			case mongo:
 				healthChecker = new MongoHealthChecker();
+				break;
+			case smtp:
+				healthChecker = new SmtpHealthChecker();
 				break;
 			case solr:
 				healthChecker = new SolrHealthChecker();

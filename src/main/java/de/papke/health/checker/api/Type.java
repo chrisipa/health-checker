@@ -12,5 +12,6 @@ public enum Type {
 	jdbc, 
 	ldap, 
 	mongo,
+	smtp,
 	solr
 }

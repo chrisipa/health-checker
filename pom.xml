@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.papke</groupId>
 	<artifactId>health-checker</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<name>Health Checker</name>
 
 	<properties>
@@ -25,6 +25,7 @@
 		<solr-solrj.version>1.4.1</solr-solrj.version>
 		<slf4j-simple.version>1.5.5</slf4j-simple.version>
 		<httpclient.version>4.1.2</httpclient.version>
+		<mail-api.version>1.6.2</mail-api.version>
 
 		<!-- docker build configuration -->
 		<registry>docker.io</registry>
@@ -227,6 +228,16 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>${httpclient.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>javax.mail-api</artifactId>
+		    <version>${mail-api.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.mail</groupId>
+    		<artifactId>javax.mail</artifactId>
+    		<version>${mail-api.version}</version>
 		</dependency>
 	</dependencies>
 </project>
