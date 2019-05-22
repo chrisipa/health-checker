@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.net.ssl.SSLSocketFactory;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +22,7 @@ import com.unboundid.ldap.sdk.SearchResult;
 import com.unboundid.ldap.sdk.SearchResultEntry;
 import com.unboundid.ldap.sdk.SearchScope;
 import com.unboundid.ldap.sdk.controls.SimplePagedResultsControl;
+import com.unboundid.util.ssl.SSLUtil;
 
 import de.papke.health.checker.HealthChecker;
 
@@ -31,6 +34,7 @@ import de.papke.health.checker.HealthChecker;
  */
 public class LdapHealthChecker extends HealthChecker {
 
+	private static final String SECURE_SCHEME = "ldaps";
 	private static Options options = new Options();
 
 	static {
@@ -57,11 +61,18 @@ public class LdapHealthChecker extends HealthChecker {
 	private LDAPConnection getConnection(String username, String password, String url, int connectTimeout, int responseTimeout) throws Exception {
 
 		LDAPURL ldapUrl = new LDAPURL(url);
+		
+		SSLSocketFactory sslSocketFactory = null;
+		if (ldapUrl.getScheme().equals(SECURE_SCHEME)) {
+			SSLUtil sslUtil = new SSLUtil();
+			sslSocketFactory = sslUtil.createSSLSocketFactory();
+		}
+		
 		LDAPConnectionOptions ldapConnectionOptions = new LDAPConnectionOptions();
 		ldapConnectionOptions.setConnectTimeoutMillis(connectTimeout);
 		ldapConnectionOptions.setResponseTimeoutMillis(responseTimeout);
 		
-		return new LDAPConnection(ldapConnectionOptions, ldapUrl.getHost(), ldapUrl.getPort(), username, password);
+		return new LDAPConnection(sslSocketFactory, ldapConnectionOptions, ldapUrl.getHost(), ldapUrl.getPort(), username, password);
 	}
 	
 	/**
