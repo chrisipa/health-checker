@@ -18,14 +18,12 @@ public enum SmtpParameter implements Parameter {
 	PORT("p", "port", "The port of the SMTP server", null),
 	ENCRYPTION("e", "encryption", "Set if SMTP server needs TLS encryption", false),
 	
+	CONNECT_TIMEOUT("c", "connect-timeout", "The connection timeout of the SMTP server (in milliseconds)", DEFAULT_CONNECT_TIMEOUT),
+	RESPONSE_TIMEOUT("r", "response-timeout", "The response timeout of the SMTP server (in milliseconds)", DEFAULT_RESPONSE_TIMEOUT),	
+	
 	USERNAME("u", "username", "The username of the SMTP server", null), 
 	PASSWORD("p", "password", "The password of the SMTP server", null),
 
-	FROM("f", "from", "The from address of the mail to send", null),
-	TO("t", "to", "The to address of the mail to send", null),
-	SUBJECT("s", "subject", "The subject of the mail to send", null),
-	BODY("b", "body", "The body text of the mail to send", null),
-	
 	PATTERN("x", "pattern", "The regex pattern to search in the SMTP server response", Pattern.compile("250.*"));
 	
 	private final String shortName;

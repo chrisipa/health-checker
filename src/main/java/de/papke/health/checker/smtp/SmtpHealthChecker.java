@@ -4,11 +4,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Address;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
@@ -17,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.sun.mail.smtp.SMTPTransport;
 
 import de.papke.health.checker.HealthChecker;
+import de.papke.health.checker.ldap.LdapParameter;
 
 /**
  * Class for checking the health of a SMTP server.
@@ -56,17 +54,19 @@ public class SmtpHealthChecker extends HealthChecker {
 		// get password
 		String password = commandLine.getOptionValue(SmtpParameter.PASSWORD.toString());
 		
-		// get from
-		String from = commandLine.getOptionValue(SmtpParameter.FROM.toString());
-
-		// get to
-		String to = commandLine.getOptionValue(SmtpParameter.TO.toString());
+		// get connect timeout
+		int connectTimeout = (Integer) LdapParameter.CONNECT_TIMEOUT.getDefaultValue();
+		String connectTimeoutString = commandLine.getOptionValue(SmtpParameter.CONNECT_TIMEOUT.toString());
+		if (StringUtils.isNotEmpty(connectTimeoutString)) {
+			connectTimeout = Integer.parseInt(connectTimeoutString);
+		}
 		
-		// get subject
-		String subject = commandLine.getOptionValue(SmtpParameter.SUBJECT.toString());
-		
-		// get subject
-		String body = commandLine.getOptionValue(SmtpParameter.BODY.toString());
+		// get response timeout
+		int responseTimeout = (Integer) LdapParameter.RESPONSE_TIMEOUT.getDefaultValue();
+		String responseTimeoutString = commandLine.getOptionValue(SmtpParameter.RESPONSE_TIMEOUT.toString());
+		if (StringUtils.isNotEmpty(responseTimeoutString)) {
+			responseTimeout = Integer.parseInt(connectTimeoutString);
+		}		
 		
 		// get pattern
 		Pattern pattern = (Pattern) SmtpParameter.PATTERN.getDefaultValue();
@@ -80,6 +80,9 @@ public class SmtpHealthChecker extends HealthChecker {
 		properties.setProperty("mail.smtp.host", hostname);
 		properties.setProperty("mail.smtp.port", String.valueOf(port));
 		properties.setProperty("mail.smtp.starttls.enable", String.valueOf(encryption));
+		properties.setProperty("mail.smtp.timeout", String.valueOf(responseTimeout));
+		properties.setProperty("mail.smtp.writetimeout", String.valueOf(responseTimeout));
+		properties.setProperty("mail.smtp.connectiontimeout", String.valueOf(connectTimeout));
 		
 		// check if authentication has to be used
 		if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)) {
@@ -91,24 +94,11 @@ public class SmtpHealthChecker extends HealthChecker {
 		// get mail session
 		Session session = Session.getDefaultInstance(properties);
 		
-		// get mime message
-		MimeMessage message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(from));
-		message.setSubject(subject);
-		message.setText(body);
-		
-		// get recipients
-		Address[] recipients = new Address[1];
-		recipients[0] = new InternetAddress(to);
-
 		// get transport
 		Transport transport = session.getTransport();
 
 		// connect to the SMTP server
 		transport.connect();
-		
-		// send mime message
-		transport.sendMessage(message, recipients);
 		
 		// get SMTP server response
 		String response = "";
