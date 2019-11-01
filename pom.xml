@@ -24,7 +24,7 @@
 		<elasticsearch.version>0.19.2</elasticsearch.version>
 		<solr-solrj.version>1.4.1</solr-solrj.version>
 		<slf4j-simple.version>1.5.5</slf4j-simple.version>
-		<httpclient.version>4.1.2</httpclient.version>
+		<httpclient.version>4.3.6</httpclient.version>
 		<mail-api.version>1.6.2</mail-api.version>
 
 		<!-- docker build configuration -->
