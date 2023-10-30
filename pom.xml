@@ -28,7 +28,7 @@
 		<postgresql.version>9.1-901.jdbc4</postgresql.version>
 		<jtds.version>1.3.1</jtds.version>
 		<ascii_table.version>1.0</ascii_table.version>
-		<elasticsearch.version>0.19.2</elasticsearch.version>
+		<elasticsearch.version>7.17.13</elasticsearch.version>
 		<solr-solrj.version>1.4.1</solr-solrj.version>
 		<slf4j-simple.version>1.5.5</slf4j-simple.version>
 		<httpclient.version>4.1.2</httpclient.version>
