@@ -65,7 +65,7 @@ public class SmtpHealthChecker extends HealthChecker {
 		int responseTimeout = (Integer) LdapParameter.RESPONSE_TIMEOUT.getDefaultValue();
 		String responseTimeoutString = commandLine.getOptionValue(SmtpParameter.RESPONSE_TIMEOUT.toString());
 		if (StringUtils.isNotEmpty(responseTimeoutString)) {
-			responseTimeout = Integer.parseInt(connectTimeoutString);
+			responseTimeout = Integer.parseInt(responseTimeoutString);
 		}		
 		
 		// get pattern
